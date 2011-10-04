@@ -14,6 +14,39 @@ could be used separately if you wish.
 You should add '-lcurl' to your linker flags to link against
 the curl library.
 
+Example
+=======
+
+#include <string>
+#include <iostream>
+
+#include "twilio.hh"
+
+using namespace std;
+using namespace databracket;
+
+int main(int argc, char** argv)
+{
+	string sid = "SID";
+	string autht = "AUTH TOKEN";
+	string from = "+1234567890";
+	string to = "+0987654321";
+	string body = "Look up and smile, I'm watching you :-)";
+
+	twilio::restclient trc(sid, autht);
+	twilio::response resp = trc.send_sms(to, from, body, true);
+
+	string message = resp.message();
+	unsigned int code = resp.code();
+	twilio::http::status status = resp.http_status();
+
+	cout << "HTTP Status: " << status << endl;
+	cout << "Twilio Error Code: " << code << endl;
+	cout << "Twilio Error Message: " << message << endl;
+
+	return 0;
+}
+
 Copyright
 =========
 All files are under a BSD-3clause license except for 'jsonxx.cc/hh'
