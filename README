@@ -1,0 +1,22 @@
+Twilio C++ client library
+=========================
+
+This is a simple Twilio C++ client library that facilitates
+sending SMS through Twilio's platform.
+
+Usage
+=====
+
+You should only include 'twilio.hh' in your source files.
+The rest of the files in this repository are helpers and
+could be used separately if you wish.
+
+You should add '-lcurl' to your linker flags to link against
+the curl library.
+
+Copyright
+=========
+All files are under a BSD-3clause license except for 'jsonxx.cc/hh'
+and 'xmlxx.cc/hh'.
+
+Author: Amr Ali <amr@databracket.com>
