@@ -4,6 +4,12 @@ Twilio C++ client library
 This is a simple Twilio C++ client library that facilitates
 sending SMS through Twilio's platform.
 
+Features
+========
+
+Currently this library only supports sending SMS via Twilio
+platform.
+
 Usage
 =====
 
@@ -32,9 +38,15 @@ int main(int argc, char** argv)
 	string from = "+1234567890";
 	string to = "+0987654321";
 	string body = "Look up and smile, I'm watching you :-)";
+	string cb = "http://www.example.com/callback.php";
 
 	twilio::restclient trc(sid, autht);
+
+	// To send SMS with no callback address.
 	twilio::response resp = trc.send_sms(to, from, body, true);
+
+	// To send SMS with a callback address.
+	//twilio::response resp_cb = trc.send_sms(to, from, body, cb, true);
 
 	string message = resp.message();
 	unsigned int code = resp.code();
