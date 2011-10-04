@@ -48,92 +48,92 @@ namespace twilio
 namespace http
 {
 
-	enum methods {
-		GET,
-		POST,
-		PUT,
-		DELETE
-	};
+    enum methods {
+        GET,
+        POST,
+        PUT,
+        DELETE
+    };
 
-	enum status {
-		OK_200 = 200, // SUCCESS, body contains representation requested.
-		OK_201 = 201, // SUCCESS, updated resource, body contains resource.
-		OK_204 = 204, // SUCCESS, deleted resource, body is empty.
-		// Hopefully we will never encounter that code as curl is instructed
-		// to follow all redirects.
-		FOUND_302 = 302, // REDIRECT.
-		NOT_MODIFIED_304 = 304, // Client's cache version is up-to-date.
-		BAD_REQUEST_400 = 400, // POST parameters are invalid.
-		UNAUTHORIZED_401 = 401,
-		NOT_FOUND_404 = 404, // You know this one.
-		SERVER_ERROR_500 = 500 // Twilio just farted, please try again.
-	};
+    enum status {
+        OK_200 = 200, // SUCCESS, body contains representation requested.
+        OK_201 = 201, // SUCCESS, updated resource, body contains resource.
+        OK_204 = 204, // SUCCESS, deleted resource, body is empty.
+        // Hopefully we will never encounter that code as curl is instructed
+        // to follow all redirects.
+        FOUND_302 = 302, // REDIRECT.
+        NOT_MODIFIED_304 = 304, // Client's cache version is up-to-date.
+        BAD_REQUEST_400 = 400, // POST parameters are invalid.
+        UNAUTHORIZED_401 = 401,
+        NOT_FOUND_404 = 404, // You know this one.
+        SERVER_ERROR_500 = 500 // Twilio just farted, please try again.
+    };
 
 } // namespace http
 
-	using std::map;
-	using std::string;
-	using std::auto_ptr;
-	using std::runtime_error;
+    using std::map;
+    using std::string;
+    using std::auto_ptr;
+    using std::runtime_error;
 
-	// Forward declaration for ::response.
-	struct response;
+    // Forward declaration for ::response.
+    struct response;
 
-	// restclient
+    // restclient
 
-	class restclient {
-	public:
-		restclient(const string& sid, const string& autht,
-				const string& endpoint = "https://api.twilio.com");
-		~restclient();
+    class restclient {
+    public:
+        restclient(const string& sid, const string& autht,
+                const string& endpoint = "https://api.twilio.com");
+        ~restclient();
 
-		response request(const string& path, http::methods method,
-				const map<string, string>& vars, bool json = true);
-		response send_sms(const string& to, const string& from,
-				const string& body, const string& statuscallback,
-				bool json = true);
-		response send_sms(const string& to, const string& from,
-				const string& body, bool json = true);
+        response request(const string& path, http::methods method,
+                const map<string, string>& vars, bool json = true);
+        response send_sms(const string& to, const string& from,
+                const string& body, const string& statuscallback,
+                bool json = true);
+        response send_sms(const string& to, const string& from,
+                const string& body, bool json = true);
 
-	private:
-		string urlify(CURL* cinst, const map<string, string>& vars) const;
-		static size_t write_data(void* ptr, size_t size, size_t nmemb,
-				void* userdata);
-		static size_t read_data(void* ptr, size_t size, size_t nmemb,
-				void* userdata);
+    private:
+        string urlify(CURL* cinst, const map<string, string>& vars) const;
+        static size_t write_data(void* ptr, size_t size, size_t nmemb,
+                void* userdata);
+        static size_t read_data(void* ptr, size_t size, size_t nmemb,
+                void* userdata);
 
-		friend class response;
+        friend class response;
 
-	private:
-		string sid_;
-		string autht_;
-		string endpoint_;
-	};
+    private:
+        string sid_;
+        string autht_;
+        string endpoint_;
+    };
 
-	// response
+    // response
 
-	struct response {
-		response(const response& ref);
+    struct response {
+        response(const response& ref);
 
-		http::status http_status() const;
-		const string& result() const;
-		bool iserror() const;
-		string message() const;
-		unsigned int code() const;
+        http::status http_status() const;
+        const string& result() const;
+        bool iserror() const;
+        string message() const;
+        unsigned int code() const;
 
-	private:
-		typedef auto_ptr<jsonxx::Object> obj_ptr;
-		response(const string& result, http::status rescode, bool json);
+    private:
+        typedef auto_ptr<jsonxx::Object> obj_ptr;
+        response(const string& result, http::status rescode, bool json);
 
-		friend class restclient;
+        friend class restclient;
 
-	private:
-		XMLNode xnod_;
-		obj_ptr obj_;
-		http::status status_;
-		string result_;
-		bool json_;
-	};
+    private:
+        XMLNode xnod_;
+        obj_ptr obj_;
+        http::status status_;
+        string result_;
+        bool json_;
+    };
 
 } // namespace twilio
 

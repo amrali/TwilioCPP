@@ -37,65 +37,65 @@ namespace databracket
 namespace curl
 {
 
-	pthread_mutex_t share_mutex = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_t share_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-	share::share()
-	{
-		CURLcode cc = curl_global_init(CURL_GLOBAL_SSL);
+    share::share()
+    {
+        CURLcode cc = curl_global_init(CURL_GLOBAL_SSL);
 
-		if (cc)
-			throw curl_error(curl_easy_strerror(cc));
+        if (cc)
+            throw curl_error(curl_easy_strerror(cc));
 
-		csh_ = curl_share_init();
+        csh_ = curl_share_init();
 
-		if (!csh_) {
-			curl_share_cleanup(csh_);
-			throw curl_error("something went wrong initializing curl share");
-		}
+        if (!csh_) {
+            curl_share_cleanup(csh_);
+            throw curl_error("something went wrong initializing curl share");
+        }
 
-		CURLSHcode csc;
+        CURLSHcode csc;
 
-		if ((csc = curl_share_setopt(csh_, CURLSHOPT_LOCKFUNC,
-						&(share::lock_function)))) {
-			curl_share_cleanup(csh_);
-			throw curl_error(curl_share_strerror(csc));
-		}
+        if ((csc = curl_share_setopt(csh_, CURLSHOPT_LOCKFUNC,
+                        &(share::lock_function)))) {
+            curl_share_cleanup(csh_);
+            throw curl_error(curl_share_strerror(csc));
+        }
 
-		if ((csc = curl_share_setopt(csh_, CURLSHOPT_UNLOCKFUNC,
-					&(share::unlock_function)))) {
-			curl_share_cleanup(csh_);
-			throw curl_error(curl_share_strerror(csc));
-		}
+        if ((csc = curl_share_setopt(csh_, CURLSHOPT_UNLOCKFUNC,
+                    &(share::unlock_function)))) {
+            curl_share_cleanup(csh_);
+            throw curl_error(curl_share_strerror(csc));
+        }
 
-		if ((csc = curl_share_setopt(csh_, CURLSHOPT_SHARE,
-					CURL_LOCK_DATA_DNS))) {
-			curl_share_cleanup(csh_);
-			throw curl_error(curl_share_strerror(csc));
-		}
-	}
+        if ((csc = curl_share_setopt(csh_, CURLSHOPT_SHARE,
+                    CURL_LOCK_DATA_DNS))) {
+            curl_share_cleanup(csh_);
+            throw curl_error(curl_share_strerror(csc));
+        }
+    }
 
-	share::~share()
-	{
-		curl_share_cleanup(csh_);
-	}
+    share::~share()
+    {
+        curl_share_cleanup(csh_);
+    }
 
-	CURLSH*
-	share::get() throw()
-	{
-		return csh_;
-	}
+    CURLSH*
+    share::get() throw()
+    {
+        return csh_;
+    }
 
-	void
-	share::lock_function(CURLSH*, curl_lock_data, curl_lock_access, void*)
-	{
-		pthread_mutex_lock(&share_mutex);
-	}
+    void
+    share::lock_function(CURLSH*, curl_lock_data, curl_lock_access, void*)
+    {
+        pthread_mutex_lock(&share_mutex);
+    }
 
-	void
-	share::unlock_function(CURLSH*, curl_lock_data, void*)
-	{
-		pthread_mutex_unlock(&share_mutex);
-	}
+    void
+    share::unlock_function(CURLSH*, curl_lock_data, void*)
+    {
+        pthread_mutex_unlock(&share_mutex);
+    }
 
 } // namespace curl
 

@@ -36,31 +36,31 @@
 namespace databracket
 {
 
-	template <class T>
-	class singleton {
-	public:
-		static std::auto_ptr<T>& instance()
-		{
-			if (!_M_instance.get())
-				_M_instance = std::auto_ptr<T>(new T);
+    template <class T>
+    class singleton {
+    public:
+        static std::auto_ptr<T>& instance()
+        {
+            if (!_M_instance.get())
+                _M_instance = std::auto_ptr<T>(new T);
 
-			assert(_M_instance.get() != NULL);
-			return _M_instance;
-		}
+            assert(_M_instance.get() != NULL);
+            return _M_instance;
+        }
 
-	protected:
-		singleton();
-		~singleton();
+    protected:
+        singleton();
+        ~singleton();
 
-	private:
-		singleton(const singleton&);
-		singleton& operator =(const singleton&);
+    private:
+        singleton(const singleton&);
+        singleton& operator =(const singleton&);
 
-	private:
-		static std::auto_ptr<T> _M_instance;
-	};
+    private:
+        static std::auto_ptr<T> _M_instance;
+    };
 
-	template <class T> std::auto_ptr<T> singleton<T>::_M_instance;
+    template <class T> std::auto_ptr<T> singleton<T>::_M_instance;
 
 } // namespace databracket
 

@@ -41,37 +41,37 @@ namespace databracket
 namespace curl
 {
 
-	using std::string;
-	using std::runtime_error;
+    using std::string;
+    using std::runtime_error;
 
-	/*
-	 * curl_error: A class to distinguish curl related exceptions from the rest.
-	 */
+    /*
+     * curl_error: A class to distinguish curl related exceptions from the rest.
+     */
 
-	class curl_error : public runtime_error {
-	public:
-		curl_error(const string& err) : runtime_error(err) {}
-		~curl_error() throw() {}
-	};
+    class curl_error : public runtime_error {
+    public:
+        curl_error(const string& err) : runtime_error(err) {}
+        ~curl_error() throw() {}
+    };
 
-	/*
-	 * share: A structure to facilitate a global usage of CURLSH.
-	 */
-	struct share {
-		share();
-		~share();
+    /*
+     * share: A structure to facilitate a global usage of CURLSH.
+     */
+    struct share {
+        share();
+        ~share();
 
-		CURLSH* get() throw();
+        CURLSH* get() throw();
 
-	private:
-		static void lock_function(CURL*, curl_lock_data,
-				curl_lock_access, void*);
-		static void unlock_function(CURL*, curl_lock_data,
-				void*);
+    private:
+        static void lock_function(CURL*, curl_lock_data,
+                curl_lock_access, void*);
+        static void unlock_function(CURL*, curl_lock_data,
+                void*);
 
-	private:
-		CURLSH* csh_;
-	};
+    private:
+        CURLSH* csh_;
+    };
 
 } // namespace curl
 

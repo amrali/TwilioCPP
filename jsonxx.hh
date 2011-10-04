@@ -68,7 +68,7 @@ class Array {
   void add(const T& value);
 
   const std::vector<Value*>& values() const {
-	return values_;
+    return values_;
   }
 
  private:
@@ -102,30 +102,30 @@ class Value {
   Value(const Value&);
   Value& operator=(const Value&);
   enum {
-	NUMBER_,
-	STRING_,
-	BOOL_,
-	NULL_,
-	ARRAY_,
-	OBJECT_,
-	INVALID_
+    NUMBER_,
+    STRING_,
+    BOOL_,
+    NULL_,
+    ARRAY_,
+    OBJECT_,
+    INVALID_
   } type_;
   union {
-	double number_value_;
-	std::string* string_value_;
-	bool bool_value_;
-	Array* array_value_;
-	Object* object_value_;
+    double number_value_;
+    std::string* string_value_;
+    bool bool_value_;
+    Array* array_value_;
+    Object* object_value_;
   };
 };
 
 template <typename T>
 bool Array::has(unsigned int i) const {
   if (i >= size()) {
-	return false;
+    return false;
   } else {
-	Value* v = values_.at(i);
-	return v->is<T>();
+    Value* v = values_.at(i);
+    return v->is<T>();
   }
 }
 
