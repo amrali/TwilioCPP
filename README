@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 
 Copyright
 =========
-All files are under a BSD-3clause license except for 'jsonxx.cc/hh'
+All files are under a BSD 3-clause license except for 'jsonxx.cc/hh'
 and 'xmlxx.cc/hh'.
 
 Author: Amr Ali <amr@databracket.com>
