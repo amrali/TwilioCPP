@@ -27,8 +27,8 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __DB_SINGLETON_HH
-#define __DB_SINGLETON_HH
+#ifndef DB_SINGLETON_HH
+#define DB_SINGLETON_HH
 
 #include <memory>
 #include <cassert>
@@ -64,4 +64,4 @@ namespace databracket
 
 } // namespace databracket
 
-#endif // __DB_SINGLETON_HH
+#endif // DB_SINGLETON_HH

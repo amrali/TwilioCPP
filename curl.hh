@@ -27,8 +27,8 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __DB_CURL_HH
-#define __DB_CURL_HH
+#ifndef DB_CURL_HH
+#define DB_CURL_HH
 
 #include <stdexcept>
 #include <string>
@@ -77,4 +77,4 @@ namespace curl
 
 } // namespace databracket
 
-#endif // __DB_CURL_HH
+#endif // DB_CURL_HH

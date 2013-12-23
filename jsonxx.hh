@@ -1,6 +1,6 @@
 // -*- mode: c++; c-basic-offset: 4; -*-
-#ifndef __JSON_HH__
-#define __JSON_HH__
+#ifndef JSON_HH
+#define JSON_HH
 
 // Author: Hong Jiang <hong@hjiang.net>
 // Contributors:
@@ -267,4 +267,4 @@ std::ostream& operator<<(std::ostream& stream, const jsonxx::Value& v);
 std::ostream& operator<<(std::ostream& stream, const jsonxx::Object& v);
 std::ostream& operator<<(std::ostream& stream, const jsonxx::Array& v);
 
-#endif // __JSON_HH__
+#endif // JSON_HH

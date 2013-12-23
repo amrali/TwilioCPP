@@ -27,8 +27,8 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __DB_TWILIO_HH
-#define __DB_TWILIO_HH
+#ifndef DB_TWILIO_HH
+#define DB_TWILIO_HH
 
 #include <stdexcept>
 #include <string>
@@ -139,4 +139,4 @@ namespace http
 
 } // namespace databracket
 
-#endif // __DB_TWILIO_HH
+#endif // DB_TWILIO_HH

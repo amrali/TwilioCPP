@@ -112,8 +112,8 @@
  *
  ****************************************************************************/
 
-#ifndef __INCLUDE_XML_NODE__
-#define __INCLUDE_XML_NODE__
+#ifndef INCLUDE_XML_NODE
+#define INCLUDE_XML_NODE
 
 #include <stdlib.h>
 
