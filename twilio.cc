@@ -162,10 +162,10 @@ namespace twilio
     restclient::send_sms(const string& to, const string& from,
             const string& body, const string& statuscallback, bool json)
     {
-        if (body.size() > 160) // see Twilio specifications
-            throw runtime_error("sms body can only hold 160 characters max");
+        if (body.size() > 1600) // see Twilio specifications
+            throw runtime_error("sms body can only hold 1600 characters max");
 
-        string path = "2010-04-01/Accounts/" + sid_ + "/SMS/Messages";
+        string path = "2010-04-01/Accounts/" + sid_ + "/Messages";
 
         map<string, string> vars;
 
